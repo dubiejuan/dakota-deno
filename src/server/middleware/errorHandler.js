@@ -1,16 +1,13 @@
 
-const errorHandler =(context)=>{
+const errorHandler =async ({ request, response },next)=>{
     
 
 const error ={
-    status:(context.response.status )?context.response.status :500,
-    message:(context.response.message)?context.response.message:'Internal Server Error'
+    status:(response.status )?response.status :500,
+    message:(response.message)?response.message:'Internal Server Error'
 }
-
-
-console.log("aca",error)
-context.response.status = error.status ;
-context.response.body = error.message;
+response.status = error.status ;
+response.body = {message : error.message}
 
 }
 
