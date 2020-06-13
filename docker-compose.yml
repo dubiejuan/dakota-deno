@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    deno:
+      build: 
+        context: .
+        dockerfile: Dockerfile
+      image: deno-custom
+      ports:
+        - "8081:3000"
+      restart: unless-stopped
+      networks:
+        - app-network
+networks:
+  app-network:
+    driver: bridge
+      

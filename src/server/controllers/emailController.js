@@ -1,31 +1,25 @@
- 
- import { assert } from "https://deno.land/std/testing/asserts.ts";
- import { createError, HttpError } from "https://deno.land/x/http_errors/mod.ts";
  import build from '../accessor/build.js'
  import check from '../accessor/check.js'
  import adapt from '../accessor/adap.js'
- const emailController = async ({ request, response} , next) => {
-     //await  next()
+ const emailController = async (context,next) => {
 
-    const { value: { name, email, message }} = await request.body();
+    const { value: { name, email, message,front}} = await context.request.body();
 
-    
+    console.log(name, email, message,front)
     try {
-   
-      const res =await check(await build(name, email, message))
 
-      console.log("response",res)
+      context.assert(name,400,"Bad Request")
+      context.assert(email,400,"Bad Request")
+      context.assert(message,400,"Bad Request")
+      context.assert(front,400,"Bad Request")
 
-      response.status = 200;
-      response.body = {};
-
-    } catch (error) {
-      console.log("----error-----",error)
-      throw error
-    }
-
-
+     const res =await check(await build(name, email, message,front))
  
+      context.response.status = 200;
+      context.response.body = {};
+    } catch (error) {
+      context.throw(error.status,error.message)
+    }
     
   }
 

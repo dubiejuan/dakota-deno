@@ -1,7 +1,7 @@
-const httpLogger = async ({request,response}, next) => {
+const httpLogger = async (context,next) => {
     await next();
-    const rt = response.headers.get("X-Response-Time");
-    console.log(`${request.method} ${request.url} - ${rt}`);
+    const rt = context.response.headers.get("X-Response-Time");
+    console.log(`${context.request.method} ${context.request.url} - ${rt}`);
   }
   
   export default httpLogger

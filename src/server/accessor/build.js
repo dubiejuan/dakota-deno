@@ -1,30 +1,28 @@
-const build =( name, email, message) =>{
+const build =( name, email, message,front) =>{
 
-    // name.assert(400);
-    // email.assert(400);
-    // message.assert(400);
-
-    const url ='http://localhost:8080/api/send-email';
+    const url ='http://nodejs:8080/api/send-email';
 
     const headers ={
     'Content-Type': 'application/json'
     };
 
+
     const data ={
         name,
         email,
-        message
+        message,
+        front
     };
 
     const timeout = 3000;
     
-    return fetch(url,{
+
+    return  fetch(url,{
     method: 'POST',
     headers,
     body: JSON.stringify(data),
     timeout
     });
-
 }
 
 

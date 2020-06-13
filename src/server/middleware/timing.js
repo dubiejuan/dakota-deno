@@ -1,9 +1,9 @@
 
-const timing = async ({request,response}, next) => {
+const timing = async (context, next) => {
     const start = Date.now();
     await next();
     const ms = Date.now() - start;
-    response.headers.set("X-Response-Time", `${ms}ms`);
+    context.response.headers.set("X-Response-Time", `${ms}ms`);
 }
 
   export default timing
