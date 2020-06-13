@@ -13,7 +13,7 @@
       context.assert(message,400,"Bad Request")
       context.assert(front,400,"Bad Request")
 
-     const res =await check(await build(name, email, message,front))
+      const res =await check(await build(name, email, message,front))
  
       context.response.status = 200;
       context.response.body = {};
